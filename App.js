@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import PostList from "./views/PostList";
 import CommentsList from "./views/CommentsList";
+import UsersList from "./views/UsersList";
+import Usuario from "./views/Usuario";
 import Login from "./views/Login";
 import Home from "./views/Home";
 import SideMenu from "./components/SideMenu";
@@ -16,19 +18,25 @@ const DrawerNavigator = createDrawerNavigator({
     screen: Login,
     navigationOptions: ({ navigation }) => ({
       drawerLockMode: "locked-closed",
-      title: "Smart Clinic"
+      title: "Login"
     })
   },
-  CommentsList: {
-    screen: CommentsList,
+  UsersList: {
+    screen: UsersList,
     navigationOptions: () => ({
-      title: "Comentarios"
+      title: "Usuarios"
+    })
+  },
+  Usuario: {
+    screen: Usuario,
+    navigationOptions: () => ({
+      title: "Usuario"
     })
   },
   HomePage: {
     screen: Home,
     navigationOptions: () => ({
-      title: "Home"
+      title: "Smart Clinic"
     })
   }
 });
