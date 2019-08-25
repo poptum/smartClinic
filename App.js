@@ -12,7 +12,7 @@ import {
   createAppContainer,
   createDrawerNavigator
 } from "react-navigation";
-
+//TODO criar um componente para substituir o sidemenu que mostra todas as paginas disponiveis no DrawerNavigator
 const DrawerNavigator = createDrawerNavigator({
   Home: {
     screen: Login,
