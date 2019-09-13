@@ -3,16 +3,26 @@ import { StyleSheet, Text, TextInput, View, FlatList } from "react-native";
 import api from "../services/api";
 import DefaultButton from "../components/DefaultButton";
 import DefaultInput from "../components/DefaultInput";
+import { AsyncStorage } from 'react-native';
 import { Button } from "react-native";
 class Login extends Component {
-  state = { user: "", password: "" };
+  state = { user: "andre@gmail.com", password: "123" };
   componentDidMount() {}
   handlePress = () => {
-    // api
-    //   .login({ user: "this.state.user", password: "this.state.password" })
-    //   .then(res => {
-    this.props.navigation.navigate("HomePage", { user: "res" });
-    //   });
+    let _this = this;
+    api.login( this.state.user, this.state.password )
+    .then(function(res) {
+      if(res.data.token) {
+        console.log('logado')
+        AsyncStorage.setItem('@user:token', res.data.token);
+        _this.props.navigation.navigate("HomePage");
+      } else {
+      }
+    }).catch(function(err) {
+      console.log('teste')
+      console.log(err)
+      
+    })
   };
   render() {
     return (
@@ -20,17 +30,17 @@ class Login extends Component {
         <Text style={{ flex: 0.6 }}>LOGO e titulo</Text>
         <DefaultInput
           placeholder={"Usuario"}
-          onChangeText={username => this.setState({ user })}
+          onChangeText={user => this.setState({ user })}
           style={styles.inputStyle}
           underlineColorAndroid={"rgba(0,0,0,0)"}
           value={this.state.user}
         />
         <DefaultInput
           placeholder={"Senha"}
-          onChangeText={username => this.setState({ password })}
+          onChangeText={password => this.setState({ password })}
           style={styles.inputStyle}
           underlineColorAndroid={"rgba(0,0,0,0)"}
-          value={this.state.username}
+          value={this.state.password}
         />
         <DefaultButton
           style={{ flex: 0.2 }}
