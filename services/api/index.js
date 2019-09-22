@@ -1,12 +1,11 @@
-import fetchival from "fetchival";
-import _ from "lodash";
 import apiConfig from "./config";
+import axios from "axios";
 
-export const api = (endPoint, payload, method, headers = {}) => {
+export const index = (endPoint, method, payload, headers = {}) => {
   const accessToken = AsyncStorage.getItem("@user:token");
+  headers["Cookie"].accessToken = accessToken;
   if (method == "POST") {
-    if (payload) payload.token = accessToken;
-
+    payload.token = accessToken;
     return axios.post(endPoint, payload);
-  } else if (method == "GET") return axios.get(endPoint);
+  } else if (method == "GET") return axios.get(endPoint, headers);
 };

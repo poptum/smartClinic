@@ -10,10 +10,10 @@ type Props = {
   value: ?any
 };
 
-export default class EmailInput extends PureComponent<Props> {
+export default class MultiLineInput extends PureComponent<Props> {
   render() {
     return (
-      <View style={styles.inputContainer}>
+      <View style={styles.containerStyle}>
         <Text style={{ fontSize: 24 }}>{this.props.label}</Text>
         <TextInput
           placeholder={this.props.placeholder}
@@ -22,6 +22,8 @@ export default class EmailInput extends PureComponent<Props> {
           autoCapitalize="none"
           // underlineColorAndroid={this.props.underlineColorAndroid}
           value={this.props.value}
+          multiline={true}
+          numberOfLines={4}
         />
       </View>
     );
@@ -31,5 +33,14 @@ export default class EmailInput extends PureComponent<Props> {
 var styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  containerStyle: {
+    backgroundColor: "#fff",
+    paddingTop: 10,
+    paddingBottom: 10,
+    padding: 10,
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#000"
   }
 });

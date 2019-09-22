@@ -5,21 +5,83 @@ import {
   TextInput,
   View,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Picker
 } from "react-native";
 import api from "../services/api";
 import DefaultButton from "../components/DefaultButton";
 import DefaultInput from "../components/DefaultInput";
+import CepInput from "../components/CepInput";
+import PatientForm from "../components/PatientForm";
+import Hmp from "../components/Hmp";
+
 import { Button } from "react-native";
 
 class Usuario extends Component {
-  state = {};
+  state = { name: "", login: "", password: "", profile: "" };
   componentDidMount() {}
-  handlePress = () => {};
+  handlePress = user => {
+    //salvar usuario e ficha relacionada ao usuario
+    //direcionar para pagina ANAMNESE
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text style={{ flex: 0.2 }}>TODO FAZER O CRUD DE USUARIOS</Text>
+        {/* <PatientForm salvar={this.handlePress} /> */}
+        <Hmp />
+        {/* <View style={{ flex: 0.1 }}>
+          <DefaultInput
+            placeholder={"Nome"}
+            onChangeText={name => this.setState({ name })}
+            style={styles.inputStyle}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
+            value={this.state.name}
+          />
+        </View>
+        <View style={{ flex: 0.1 }}>
+          <Text>Login: </Text>
+          <DefaultInput
+            placeholder={"Login/email"}
+            onChangeText={login => this.setState({ login })}
+            style={styles.inputStyle}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
+            value={this.state.login}
+          />
+        </View>
+        <View style={{ flex: 0.1 }}>
+          <Text>Senha: </Text>
+          <DefaultInput
+            placeholder={"Senha"}
+            onChangeText={password => this.setState({ password })}
+            style={styles.inputStyle}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
+            value={this.state.password}
+          />
+        </View>
+        <View style={{ flex: 0.1, marginBottom: 50 }}>
+          <Text>Perfil: </Text>
+          <Picker
+            selectedValue={this.state.profile}
+            style={{ backgroundColor: "grey", marginBottom: 20 }}
+            onValueChange={(itemValue, itemIndex) =>
+              this.setState({ profile: itemValue })
+            }
+          >
+            <Picker.Item label="Administrador" value="admin" />
+            <Picker.Item label="Professor" value="prof" />
+            <Picker.Item label="Estudante" value="student" />
+            <Picker.Item label="Paciente" value="patient" />
+          </Picker>
+        </View>
+        <View>
+          <DefaultButton
+            style={{ flex: 0.1, marginTop: 30 }}
+            title={"Salvar"}
+            onPress={this.handlePress}
+            disabled={false}
+          />
+        </View> */}
       </View>
     );
   }
@@ -27,13 +89,11 @@ class Usuario extends Component {
 
 const styles = StyleSheet.create({
   inputStyle: {
-    flex: 0.1,
     marginBottom: 5,
     backgroundColor: "grey",
     borderBottomColor: "#0091ea",
-    borderRadius: 5,
     fontSize: 20,
-    paddingLeft: 20
+    marginBottom: 10
   }
 });
 
