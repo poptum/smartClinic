@@ -14,84 +14,51 @@ import DefaultInput from "../components/DefaultInput";
 import CepInput from "../components/CepInput";
 import PatientForm from "../components/PatientForm";
 import Hmp from "../components/Hmp";
+import Anamnese from "../components/Anamnese";
+import HistoriaFamiliar from "../components/HistoriaFamiliar";
 
 import { Button } from "react-native";
 
 class Usuario extends Component {
-  state = { name: "", login: "", password: "", profile: "" };
-  componentDidMount() {}
+  state = { etapa: 5 };
+  componentDidMount() {
+    this.state.etapa = 1;
+  }
   handlePress = user => {
-    api
-    .registerUser(user)
-    .then(function(res) {
-      console.log('retornou com sucesso')
-      console.log(res)
-    })
-    .catch(function(err) {
-      console.log("teste");
-      console.log(err);
-    });
+    this.setState({ etapa: 2 });
   };
 
-  render() { 
-    return (
-      <View style={{ flex: 1 }}>
-        <PatientForm salvar={this.handlePress} />
-        {/* <Hmp /> */}
-        {/* <View style={{ flex: 0.1 }}>
-          <DefaultInput
-            placeholder={"Nome"}
-            onChangeText={name => this.setState({ name })}
-            style={styles.inputStyle}
-            underlineColorAndroid={"rgba(0,0,0,0)"}
-            value={this.state.name}
-          />
+  render() {
+    if (this.state.etapa == 1)
+      return (
+        <View style={{ flex: 1 }}>
+          <PatientForm salvar={this.handlePress} />
         </View>
-        <View style={{ flex: 0.1 }}>
-          <Text>Login: </Text>
-          <DefaultInput
-            placeholder={"Login/email"}
-            onChangeText={login => this.setState({ login })}
-            style={styles.inputStyle}
-            underlineColorAndroid={"rgba(0,0,0,0)"}
-            value={this.state.login}
-          />
+      );
+    if (this.state.etapa == 2)
+      return (
+        <View style={{ flex: 1 }}>
+          <Anamnese salvar={this.handlePress} />
         </View>
-        <View style={{ flex: 0.1 }}>
-          <Text>Senha: </Text>
-          <DefaultInput
-            placeholder={"Senha"}
-            onChangeText={password => this.setState({ password })}
-            style={styles.inputStyle}
-            underlineColorAndroid={"rgba(0,0,0,0)"}
-            value={this.state.password}
-          />
+      );
+    if (this.state.etapa == 3)
+      return (
+        <View style={{ flex: 1 }}>
+          <Hmp salvar={this.handlePress} />
         </View>
-        <View style={{ flex: 0.1, marginBottom: 50 }}>
-          <Text>Perfil: </Text>
-          <Picker
-            selectedValue={this.state.profile}
-            style={{ backgroundColor: "grey", marginBottom: 20 }}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({ profile: itemValue })
-            }
-          >
-            <Picker.Item label="Administrador" value="admin" />
-            <Picker.Item label="Professor" value="prof" />
-            <Picker.Item label="Estudante" value="student" />
-            <Picker.Item label="Paciente" value="patient" />
-          </Picker>
+      );
+    if (this.state.etapa == 4)
+      return (
+        <View style={{ flex: 1 }}>
+          <Hmp salvar={this.handlePress} />
         </View>
-        <View>
-          <DefaultButton
-            style={{ flex: 0.1, marginTop: 30 }}
-            title={"Salvar"}
-            onPress={this.handlePress}
-            disabled={false}
-          />
-        </View> */}
-      </View>
-    );
+      );
+    if (this.state.etapa == 5)
+      return (
+        <View style={{ flex: 1 }}>
+          <HistoriaFamiliar salvar={this.handlePress} />
+        </View>
+      );
   }
 }
 

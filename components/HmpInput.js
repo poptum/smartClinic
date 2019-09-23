@@ -12,7 +12,10 @@ type Props = {
   nao_relata: any,
   tipo_input: any,
   check: any,
-  obj: any
+  obj: any,
+  label_opcao_um?: any,
+  label_opcao_dois?: any,
+  label_descricao?: any
 };
 import { CheckBox } from "react-native-elements";
 // state = {};
@@ -22,10 +25,14 @@ export default class HmpInput extends PureComponent<Props> {
     return (
       <View style={styles.containerStyle}>
         <Text style={{ fontSize: 24 }}>{this.props.label}</Text>
-        <View style={{ flexDirection:"row", flex: 1}}>
+        <View style={{ flexDirection: "row", flex: 1 }}>
           <View style={{ flex: 0.5 }}>
             <CheckBox
-              title="Relata história de alterações"
+              title={
+                this.props.label_opcao_um
+                  ? this.props.label_opcao_um
+                  : "Relata história de alterações"
+              }
               checked={this.props.obj.relata}
               onPress={() =>
                 this.props.check(this.props.nome_input, {
@@ -38,7 +45,11 @@ export default class HmpInput extends PureComponent<Props> {
           </View>
           <View style={{ flex: 0.5 }}>
             <CheckBox
-              title="Não relata história de alterações"
+              title={
+                this.props.label_opcao_dois
+                  ? this.props.label_opcao_dois
+                  : "Não relata história de alterações"
+              }
               checked={this.props.obj.nao_relata}
               onPress={() =>
                 this.props.check(this.props.nome_input, {
@@ -48,18 +59,22 @@ export default class HmpInput extends PureComponent<Props> {
                 })
               }
             />
+          </View>
         </View>
-        </View>
-        
+
         <DefaultInput
-              label={"Qual(is) ? Quando ?"}
-              placeholder={""}
-              onChangeText={descricao => this.props.onChangeText(descricao)}
-              style={styles.inputStyle}
-              underlineColorAndroid={"rgba(0,0,0,0)"}
-              value={this.props.obj.descricao}
-              //   onChangeText={indicacao => this.setState({ indicacao })}
-            />
+          label={
+            this.props.label_descricao
+              ? this.props.label_descricao
+              : "Qual(is) ? Quando ?"
+          }
+          placeholder={""}
+          onChangeText={descricao => this.props.onChangeText(descricao)}
+          style={styles.inputStyle}
+          underlineColorAndroid={"rgba(0,0,0,0)"}
+          value={this.props.obj.descricao}
+          //   onChangeText={indicacao => this.setState({ indicacao })}
+        />
       </View>
     );
   }
