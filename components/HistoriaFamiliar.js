@@ -21,8 +21,8 @@ class HistoriaFamiliar extends Component {
   state = {
     doenca_familiar: { relata: false, nao_relata: false, descricao: "" },
     pais_vivos: { relata: false, nao_relata: false, descricao: "" },
-    irmaos: { numero: 0, mortos: 0, descricao: "" },
-    filhos: { numero: 0, mortos: 0, descricao: "" }
+    irmaos: { numero: "", mortos: "", descricao: "" },
+    filhos: { numero: "", mortos: "", descricao: "" }
   };
 
   componentDidMount() {}
@@ -108,6 +108,7 @@ class HistoriaFamiliar extends Component {
                   style={styles.inputStyle}
                   underlineColorAndroid={"rgba(0,0,0,0)"}
                   value={this.state.irmaos.numero}
+                  keyboardType={"numeric"}
                   //   onChangeText={indicacao => this.setState({ indicacao })}
                 />
               </View>
@@ -126,6 +127,7 @@ class HistoriaFamiliar extends Component {
                   }
                   style={styles.inputStyle}
                   underlineColorAndroid={"rgba(0,0,0,0)"}
+                  keyboardType={"numeric"}
                   value={this.state.irmaos.mortos}
                   //   onChangeText={indicacao => this.setState({ indicacao })}
                 />

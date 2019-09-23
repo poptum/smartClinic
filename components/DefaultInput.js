@@ -7,7 +7,8 @@ type Props = {
   onChangeText: any,
   style: any,
   //   underlineColorAndroid: any,
-  value: ?any
+  value: ?any,
+  keyboardType?: any
 };
 
 export default class EmailInput extends PureComponent<Props> {
@@ -22,6 +23,9 @@ export default class EmailInput extends PureComponent<Props> {
           autoCapitalize="none"
           // underlineColorAndroid={this.props.underlineColorAndroid}
           value={this.props.value}
+          keyboardType={
+            this.props.keyboardType ? this.props.keyboardType : null
+          }
         />
       </View>
     );
