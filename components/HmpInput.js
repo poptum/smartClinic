@@ -22,8 +22,8 @@ export default class HmpInput extends PureComponent<Props> {
     return (
       <View style={styles.containerStyle}>
         <Text style={{ fontSize: 24 }}>{this.props.label}</Text>
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flex: 0.3 }}>
+        <View style={{ flexDirection:"row", flex: 1}}>
+          <View style={{ flex: 0.5 }}>
             <CheckBox
               title="Relata história de alterações"
               checked={this.props.obj.relata}
@@ -36,22 +36,8 @@ export default class HmpInput extends PureComponent<Props> {
               }
             />
           </View>
-          <View style={{ flex: 0.7 }}>
-            <DefaultInput
-              label={"Qual(is) ? Quando ?"}
-              placeholder={""}
-              onChangeText={descricao => this.props.onChangeText(descricao)}
-              style={styles.inputStyle}
-              underlineColorAndroid={"rgba(0,0,0,0)"}
-              value={this.props.obj.descricao}
-              //   onChangeText={indicacao => this.setState({ indicacao })}
-            />
-          </View>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flex: 0.3 }}>
+          <View style={{ flex: 0.5 }}>
             <CheckBox
-              center
               title="Não relata história de alterações"
               checked={this.props.obj.nao_relata}
               onPress={() =>
@@ -62,8 +48,18 @@ export default class HmpInput extends PureComponent<Props> {
                 })
               }
             />
-          </View>
         </View>
+        </View>
+        
+        <DefaultInput
+              label={"Qual(is) ? Quando ?"}
+              placeholder={""}
+              onChangeText={descricao => this.props.onChangeText(descricao)}
+              style={styles.inputStyle}
+              underlineColorAndroid={"rgba(0,0,0,0)"}
+              value={this.props.obj.descricao}
+              //   onChangeText={indicacao => this.setState({ indicacao })}
+            />
       </View>
     );
   }
@@ -77,6 +73,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   containerStyle: {
+    flex: 1,
     backgroundColor: "#fff",
     paddingTop: 10,
     paddingBottom: 10,

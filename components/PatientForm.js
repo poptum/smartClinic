@@ -42,7 +42,7 @@ class PatientForm extends Component {
   };
   componentDidMount() {}
   handlePress = () => {
-    this.props.salvar(this.state.name);
+    this.props.salvar(this.state);
   };
 
   handleCEP = cep => {

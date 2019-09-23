@@ -1,11 +1,19 @@
 import apiConfig from "./config";
 import axios from "axios";
+import { AsyncStorage } from 'react-native';
 
-export const index = (endPoint, method, payload, headers = {}) => {
-  const accessToken = AsyncStorage.getItem("@user:token");
-  headers["Cookie"].accessToken = accessToken;
+export async function safeRequests(endPoint, method, payload, headers = {}) {
+  const accessToken = await AsyncStorage.getItem("@user:token");
+  console.log(accessToken)
+  let config = {
+    headers:{ Cookie:"token=" + accessToken },
+    withCredentials:true
+  }
   if (method == "POST") {
-    payload.token = accessToken;
-    return axios.post(endPoint, payload);
-  } else if (method == "GET") return axios.get(endPoint, headers);
-};
+    console.log('POST')
+    console.log(endPoint)
+    console.log(payload)
+    console.log(config)
+    await axios.post(endPoint, payload, config);
+  } else if (method == "GET") await axios.get(endPoint, config);
+}

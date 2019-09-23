@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
+import {safeRequests} from "./api/index";
+
 const api = {
   getPosts: function() {
     return fetch("https://jsonplaceholder.typicode.com/posts").then(response =>
@@ -15,14 +16,12 @@ const api = {
     return axios
       .post(
         "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/login",
-        {email, password }
+        {email, password } 
       )
 
   },
-  registerUser: function(id) {
-    let url = "https://jsonplaceholder.typicode.com/comments";
-    if (id) url = url + "?postId=" + id;
-    return fetch(url).then(response => response.json());
+  registerUser: async function(user) { 
+    await safeRequests("http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/user", "POST", user)
   },
   getUser: function(id) {
     let url = "https://jsonplaceholder.typicode.com/comments";

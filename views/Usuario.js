@@ -21,15 +21,23 @@ class Usuario extends Component {
   state = { name: "", login: "", password: "", profile: "" };
   componentDidMount() {}
   handlePress = user => {
-    //salvar usuario e ficha relacionada ao usuario
-    //direcionar para pagina ANAMNESE
+    api
+    .registerUser(user)
+    .then(function(res) {
+      console.log('retornou com sucesso')
+      console.log(res)
+    })
+    .catch(function(err) {
+      console.log("teste");
+      console.log(err);
+    });
   };
 
-  render() {
+  render() { 
     return (
       <View style={{ flex: 1 }}>
-        {/* <PatientForm salvar={this.handlePress} /> */}
-        <Hmp />
+        <PatientForm salvar={this.handlePress} />
+        {/* <Hmp /> */}
         {/* <View style={{ flex: 0.1 }}>
           <DefaultInput
             placeholder={"Nome"}
