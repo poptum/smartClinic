@@ -24,6 +24,7 @@ class Usuario extends Component {
     //passar o usuario para a proxima etapa do cadastro
     switch (etapa) {
       case 1:
+        payload.etapa_cadastro = 1;
           api
       .registerPatient(payload, 'paciente')
       .then(function(res) {
@@ -38,7 +39,9 @@ class Usuario extends Component {
       });
         break;
       case 2:
-          payload.paciente = this.state.usuario
+          payload.paciente = this.state.usuario;
+        payload.etapa_cadastro = 2;
+
           api
           .registerPatient(payload, 'anamnese')
           .then(function(res) {
@@ -51,7 +54,9 @@ class Usuario extends Component {
           });
             break;
       case 3:
-          payload.paciente = this.state.usuario
+          payload.etapa_cadastro = 3;
+
+          payload.paciente = this.state.usuario;
           api
           .registerPatient(payload, 'hmp')
           .then(function(res) {
@@ -64,6 +69,7 @@ class Usuario extends Component {
           }); 
             break;
         case 4:
+        payload.etapa_cadastro = 4;
             api
             .registerPatient(payload, 'historiaFamiliar')
             .then(function(res) {
