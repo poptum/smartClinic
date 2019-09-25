@@ -14,6 +14,6 @@ export async function safeRequests(endPoint, method, payload, headers = {}) {
     console.log(endPoint)
     console.log(payload)
     console.log(config)
-    await axios.post(endPoint, payload, config);
-  } else if (method == "GET") await axios.get(endPoint, config);
+   return axios.post(endPoint, payload, config)
+  } else if (method == "GET") return axios.get(endPoint, config);
 }

@@ -23,29 +23,38 @@ type Props = {
 };
 class PatientForm extends Component {
   state = {
-    name: "",
-    cep: "",
-    bairro: "",
-    rua: "",
-    cidade: "",
-    estado: "",
-    telefone: "",
-    ocupacao: "",
-    nacionalidade: "",
-    naturalidade: "",
-    genero: "",
-    data_nascimento: "",
-    cor: "",
-    mae: "",
-    indicacao: "",
-    observacao: ""
+    nome: null,
+    cep: null,
+    bairro: null,
+    rua: null,
+    cidade: null,
+    estado: null,
+    telefone: null,
+    telefone_comercial: null,
+    ocupacao: null,
+    nacionalidade: null,
+    naturalidade: null,
+    genero: "masculino",
+    data_nascimento: null,
+    cor: null,
+    mae: null,
+    indicacao: null,
+    observacao: null
   };
   componentDidMount() {}
   handlePress = () => {
-    this.props.salvar(this.state);
+    let payload = {}
+    Object.assign(payload, this.state);
+    if(payload.cep)
+    payload.cep = payload.cep.replace(/[^0-9.]/g, '');
+    if(payload.telefone_comercial)
+    payload.telefone_comercial = payload.telefone_comercial.replace(/[^0-9.]/g, '');
+    if(payload.telefone)
+    payload.telefone = payload.telefone.replace(/[^0-9.]/g, '');
+    this.props.salvar(payload, 1);
   };
 
-  handleCEP = cep => {
+  handleCEP = cep => { 
     this.setState({ cep });
     if (cep.length >= 9)
       fetch("https://api.pagar.me/1/zipcodes/" + cep, { method: "get" })
@@ -68,11 +77,11 @@ class PatientForm extends Component {
             <DefaultInput
               label={"Nome"}
               placeholder={"Nome"}
-              onChangeText={name => this.setState({ name })}
+              onChangeText={nome => this.setState({ nome })}
               style={styles.inputStyle}
               underlineColorAndroid={"rgba(0,0,0,0)"}
-              value={this.state.name}
-            />
+              value={this.state.nome}
+            /> 
 
             <View style={{}}>
               <View style={{ flex: 0.5 }}>
@@ -184,7 +193,7 @@ class PatientForm extends Component {
                   placeholder={"Data de Nascimento"}
                   onChangeText={data_nascimento =>
                     this.setState({ data_nascimento })
-                  }
+                  }  
                   style={styles.inputStyle}
                   underlineColorAndroid={"rgba(0,0,0,0)"}
                   value={this.state.data_nascimento}
@@ -227,7 +236,7 @@ class PatientForm extends Component {
                   style={styles.selectStyle}
                   onValueChange={(itemValue, itemIndex) =>
                     this.setState({ genero: itemValue })
-                  }
+                  } 
                 >
                   <Picker.Item label="Masculino" value="masculino" />
                   <Picker.Item label="Feminino" value="feminino" />

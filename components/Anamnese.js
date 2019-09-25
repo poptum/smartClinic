@@ -30,7 +30,7 @@ class Anamnese extends Component {
 
   componentDidMount() {}
   handlePress = () => {
-    this.props.salvar(this.state.name);
+    this.props.salvar(this.state, 2);
   };
 
   render() {
