@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import PostList from "./views/PostList";
 import CommentsList from "./views/CommentsList";
 import UsersList from "./views/UsersList";
+import UserDisplay from "./views/UserDisplay";
 import Usuario from "./views/Usuario";
 import Login from "./views/Login";
 import Home from "./views/Home";
@@ -31,6 +32,12 @@ const DrawerNavigator = createDrawerNavigator({
     screen: Usuario,
     navigationOptions: () => ({
       title: "Usuario"
+    })
+  },
+  UserDisplay: {
+    screen: UserDisplay,
+    navigationOptions: () => ({
+      title: "UserDisplay"
     })
   },
   HomePage: {

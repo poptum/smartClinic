@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { StyleSheet, TouchableNativeFeedback, View, Text } from "react-native";
-type Props = { title: string, onPress: any, disabled?: boolean };
+type Props = { title: string, onPress: any, disabled?: boolean, style?: any };
 
 export default class DefaultButton extends PureComponent<Props> {
   render() {
