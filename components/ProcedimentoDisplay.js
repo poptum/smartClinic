@@ -21,13 +21,13 @@ export default class ProcedimentoDisplay extends Component {
         <View style={styles.row}>
           <Text style={styles.title}> Procedimento a ser realizado : </Text>
           <Text style={styles.subtitle}>
-            {this.props.user.queixa_principal}
+            {/* {this.props.user.queixa_principal} */}
           </Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.title}> Aluno a realizar o procedimento : </Text>
           <Text style={styles.subtitle}>
-            {this.props.user.queixa_principal}
+            {/* {this.props.user.queixa_principal} */}
           </Text>
         </View>
         <View style={styles.row}>
@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   column: {
-    flex: 0.5
+    flex: 0.5,
+    paddingLeft: 25,
+    paddingRight: 25
   },
   tricolumn: {
     flex: 0.3

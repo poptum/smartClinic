@@ -7,6 +7,9 @@ import UserDisplay from "./views/UserDisplay";
 import Usuario from "./views/Usuario";
 import Login from "./views/Login";
 import Home from "./views/Home";
+import Procedimentos from "./views/Procedimentos";
+import Procedimento from "./views/Procedimento";
+import QrCode from "./views/QrCode";
 import SideMenu from "./components/SideMenu";
 import {
   createStackNavigator,
@@ -19,8 +22,7 @@ const DrawerNavigator = createDrawerNavigator({
     screen: Login,
     navigationOptions: ({ navigation }) => ({
       drawerLockMode: "locked-closed",
-      title: "Login"
-    })
+    }) 
   },
   UsersList: {
     screen: UsersList,
@@ -31,19 +33,35 @@ const DrawerNavigator = createDrawerNavigator({
   Usuario: {
     screen: Usuario,
     navigationOptions: () => ({
-      title: "Usuario"
     })
   },
+  Procedimentos: {
+    screen: Procedimentos,
+    navigationOptions: () => ({
+      title: "Prodecimentos"
+    })
+  },
+  Procedimento: {
+    screen: Procedimento,
+    navigationOptions: () => ({
+      title: "Procedimento"
+    })
+  },
+  // QrCode: {
+  //   screen: QrCode,
+  //   navigationOptions: () => ({
+  //     title: "QrCode"
+  //   })
+  // },
   UserDisplay: {
     screen: UserDisplay,
     navigationOptions: () => ({
-      title: "UserDisplay"
     })
   },
   HomePage: {
     screen: Home,
     navigationOptions: () => ({
-      title: "Smart Clinic"
+      title: "Home"
     })
   }
 });

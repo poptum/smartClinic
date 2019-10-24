@@ -10,6 +10,9 @@ import Icon from "react-native-vector-icons/Ionicons";
 import ActionButton from "react-native-action-button";
 
 class UserDisplay extends Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   state = {
     user: {},
     anamnese: {}

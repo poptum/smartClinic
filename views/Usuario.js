@@ -12,6 +12,9 @@ import api from "../services/api";
 import { Button } from "react-native";
 
 class Usuario extends Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   state = { etapa: 1, usuario:null }; 
   componentDidMount() {
     this.state.etapa = 1;
@@ -75,6 +78,7 @@ class Usuario extends Component {
             .then(function(res) {
               //mensagem amigavel
               // this.setState({ etapa: 3 });
+              this.props.navigation.navigate("UsersList");
             })
             .catch(function(err) {
               console.log("teste");
@@ -82,7 +86,7 @@ class Usuario extends Component {
             });
               break;
       default:
-        console.log('Sorry, we are out of ' + expr + '.');
+        console.log('Sorry, we are out of .');
     }
   };
 
