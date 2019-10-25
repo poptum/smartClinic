@@ -15,30 +15,42 @@ class UserDisplay extends Component {
   }
   state = {
     user: {},
-    anamnese: {}
+    loggedUser: {},
+    anamnese: {},
+    procedimento: {}
   };
   handlePress = () => {
-    this.props.navigation.navigate("Usuario");
+    this.props.navigation.navigate("Procedimento");
   };
 
-  handlePressUserCard = () => {
-    this.props.navigation.navigate("Usuario");
+  handleProcedimento = (decision) => {
+    api.editProcedure({status:decision}, 'editProcedure')
+      .then(function(res) {
+        this.setState({ procedimento: res.data });
+      })
+      .catch(function(err) {
+        console.log("teste");
+        console.log(err);
+      });
   };
+
   componentDidMount() {
     const user = this.props.navigation.getParam("user");
-    console.log("user1123421");
-    console.log(user.anamneseDb);
+    const loggedUser = AsyncStorage.getItem("@user:profile");
     this.setState({ user });
+    this.setState({ loggedUser });
     this.setState({ anamnese: user.anamneseDb });
   }
   render() {
     return (
       <View style={styles.mainConatinerStyle}>
         <ScrollView>
+          {/* mostrar procedimento somente se tiver procedimentos */}
           <Panel key={5} title={"Procedimento"} bgColor={"grey"}>
             <ProcedimentoDisplay
-              user={this.state.anamnese}
-              onPress={this.handlePressUserCard}
+              procedimento={this.state.procedimento}
+              profile = {this.state.loggedUser}            
+              onPress={this.handleProcedimento}
             />
           </Panel>
 
@@ -67,6 +79,11 @@ class UserDisplay extends Component {
             />
           </Panel>
         </ScrollView>
+        <ActionButton
+          style={styles.floatingMenuButtonStyle}
+          onPress={this.handlePress}
+          buttonColor="rgba(231,76,60,1)"
+        ></ActionButton>
       </View>
     );
   }

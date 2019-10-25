@@ -12,6 +12,7 @@ import DefaultButton from "../components/DefaultButton";
 import DefaultInput from "../components/DefaultInput";
 import { Button } from "react-native";
 import { Drawer, Container, Header, Content } from "native-base";
+import QRCode from 'react-native-qrcode';
 class SideBar extends Component {
   render() {
     return (
@@ -46,6 +47,11 @@ class Home extends Component {
         <Text style={{ flex: 0.8, backgroundColor: "red" }}>
           Espaço dedicado para leitura de qrcode
         </Text>
+        {/* <QRCode
+          value={'teste'}
+          size={200}
+          bgColor='purple'
+          fgColor='white'/> */}
       </View>
     );
   }

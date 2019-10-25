@@ -10,8 +10,15 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { Row } from "native-base";
-type Props = { user: any };
+type Props = { procedimento: any, profile: any, onPress: any  };
 
+handlePress = (ordem) => {
+  if(ordem == "Reprovar")
+    this.props.onPress("reprovar");
+  else
+    this.props.onPress("aprovar");
+
+};
 // TODO conferir a estilização dos componentes
 export default class ProcedimentoDisplay extends Component {
   render() {
@@ -21,32 +28,40 @@ export default class ProcedimentoDisplay extends Component {
         <View style={styles.row}>
           <Text style={styles.title}> Procedimento a ser realizado : </Text>
           <Text style={styles.subtitle}>
-            {/* {this.props.user.queixa_principal} */}
+            {this.props.procedimento.nome}
           </Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.title}> Aluno a realizar o procedimento : </Text>
           <Text style={styles.subtitle}>
-            {/* {this.props.user.queixa_principal} */}
+            {this.props.procedimento.aluno}
           </Text>
         </View>
+        <View style={styles.row}>
+          <Text style={styles.title}> Descrição do procedimento : </Text>
+          <Text style={styles.subtitle}>
+            {this.props.procedimento.descricao}
+          </Text>
+        </View>
+        {this.props.procedimento.status == 'pendente' && this.props.profile == 'professor'  ?  
         <View style={styles.row}>
           <View style={styles.column}>
             <DefaultButton
               style={{ backgroundColor: "green", flex: 0.8 }}
               title={"Aprovar"}
-              onPress={this.handlePress}
+              onPress={() => this.handlePress("Aprovar")}
               disabled={false}
             />
           </View>
           <View style={styles.column}>
             <DefaultButton
               title={"Reprovar"}
-              onPress={this.handlePress}
+              onPress={() => this.handlePress("Reprovar")}
               disabled={false}
             />
           </View>
         </View>
+        : <View>{this.props.procedimento.status}</View>}
       </View>
     );
   }
@@ -59,8 +74,8 @@ const styles = StyleSheet.create({
   },
   column: {
     flex: 0.5,
-    paddingLeft: 25,
-    paddingRight: 25
+    paddingLeft: 10,
+    paddingRight: 10
   },
   tricolumn: {
     flex: 0.3

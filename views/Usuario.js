@@ -78,7 +78,7 @@ class Usuario extends Component {
             .then(function(res) {
               //mensagem amigavel
               // this.setState({ etapa: 3 });
-              this.props.navigation.navigate("UsersList");
+              this.props.navigation.navigate("QrCode", {user: this.state.usuario.id});
             })
             .catch(function(err) {
               console.log("teste");

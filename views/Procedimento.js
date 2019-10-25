@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import {
   StyleSheet,
-  View
+  View,
+  ToastAndroid 
 } from "react-native";
 import ProcedimentoForm from "../components/ProcedimentoForm";
 import api from "../services/api";
@@ -16,17 +17,12 @@ class Procedimento extends Component {
   componentDidMount() {
     this.state.etapa = 1;
   }
-  handlePress = (form, etapa) => {
+  handlePress = (form) => {
     let payload = {}
     Object.assign(payload, form);
-    let _this = this;
-    api
-    .registerPatient(payload, 'paciente')
-    .then(function(res) {
-      console.log(res.data)
-      //mensagem amigavel
-      _this.setState({ usuario: res.data.id });
-      _this.setState({ etapa: 2 });
+    api.registerProcedure(payload, 'createProcedure').then(function(res) {
+      this.props.navigation.navigate("UserDisplay", { user: item });
+      ToastAndroid.show('Procedimento criado com sucesso', ToastAndroid.SHORT)
     })
   };
 

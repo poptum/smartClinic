@@ -23,7 +23,31 @@ const api = {
       payload
     );
   },
+  registerProcedure: async function(payload, endpoint) {
+    return safeRequests(
+      "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
+        endpoint,
+      "POST",
+      payload
+    );
+  },
+  editProcedure: async function(payload, endpoint) {
+    return safeRequests(
+      "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
+        endpoint,
+      "POST",
+      payload
+    );
+  },
+  
   getUsers: function(endpoint) {
+    return safeRequests(
+      "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
+        endpoint,
+      "GET"
+    );
+  },
+  getUser: function(endpoint) {
     return safeRequests(
       "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
         endpoint,

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, TextInput, View, FlatList } from "react-native";
+import { StyleSheet, Text, TextInput, View, FlatList, ToastAndroid } from "react-native";
 import api from "../services/api";
 import DefaultButton from "../components/DefaultButton";
 import DefaultInput from "../components/DefaultInput";
 import { AsyncStorage } from "react-native";
 import { Button } from "react-native";
 class Login extends Component {
+    static navigationOptions = {
+    drawerLabel: () => null
+  }
   state = { user: "andre@gmail.com", password: "123" };
   componentDidMount() {}
   handlePress = () => {
@@ -14,8 +17,9 @@ class Login extends Component {
       .login(this.state.user, this.state.password)
       .then(function(res) {
         if (res.data.token) {
-          console.log("logado");
+          ToastAndroid.show('Procedimento criado com sucesso', ToastAndroid.SHORT)
           AsyncStorage.setItem("@user:token", res.data.token);
+          AsyncStorage.setItem("@user:profile", res.data.profile);
           _this.props.navigation.navigate("HomePage");
         } else {
         }
