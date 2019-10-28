@@ -31,7 +31,7 @@ const api = {
       payload
     );
   },
-  editProcedure: async function(payload, endpoint) {
+  editProcedimento: async function(payload, endpoint) {
     return safeRequests(
       "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
         endpoint,
@@ -39,7 +39,14 @@ const api = {
       payload
     );
   },
-  
+  getUsersForProcedure: async function(endpoint) {
+    return safeRequests(
+      "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
+        endpoint,
+      "GET"
+    );
+  },
+
   getUsers: function(endpoint) {
     return safeRequests(
       "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
@@ -52,6 +59,14 @@ const api = {
       "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
         endpoint,
       "GET"
+    );
+  },
+  get: function(endpoint, payload) {
+    return safeRequests(
+      "http://ec2-18-228-36-214.sa-east-1.compute.amazonaws.com:3000/api/" +
+        endpoint,
+      "GET",
+      payload
     );
   }
 };

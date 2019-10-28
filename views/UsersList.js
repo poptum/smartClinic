@@ -15,8 +15,6 @@ class UsersList extends Component {
   };
 
   handlePressUserCard = item => {
-    console.log("item");
-    console.log(item);
     this.props.navigation.navigate("UserDisplay", { user: item });
   };
   componentDidMount() {

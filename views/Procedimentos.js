@@ -7,19 +7,31 @@ import ActionButton from "react-native-action-button";
 import { SearchBar } from "react-native-elements";
 class Procedimentos extends Component {
   state = {
-    filter: "", 
-    procedimentos: [
-        {user: "Andre", procedimento: "Canal", status: "Aprovado", id: 1},
-        {user: "Lucas", procedimento: "Limpeza", status: "Reprovado", id: 2},
-        {user: "Patricia", procedimento: "Obturação", status: "Em Analise", id: 3},
-        {user: "Flavio", procedimento: "Remoção", status: "Finalizado", id: 4}
-    ],
-    filterArray: [
-      {user: "Andre", procedimento: "Canal", status: "Aprovado", id: 1},
-      {user: "Lucas", procedimento: "Limpeza", status: "Reprovado", id: 2},
-      {user: "Patricia", procedimento: "Obturação", status: "Em Analise", id: 3},
-      {user: "Flavio", procedimento: "Remoção", status: "Finalizado", id: 4}
-    ]
+    filter: "",
+    procedimentos: null,
+    // [
+    // { user: "Andre", procedimento: "Canal", status: "Aprovado", id: 1 },
+    // { user: "Lucas", procedimento: "Limpeza", status: "Reprovado", id: 2 },
+    // {
+    //   user: "Patricia",
+    //   procedimento: "Obturação",
+    //   status: "Em Analise",
+    //   id: 3
+    // },
+    // { user: "Flavio", procedimento: "Remoção", status: "Finalizado", id: 4 }
+    // ],
+    filterArray: null
+    // [
+    // { user: "Andre", procedimento: "Canal", status: "Aprovado", id: 1 },
+    // { user: "Lucas", procedimento: "Limpeza", status: "Reprovado", id: 2 },
+    // {
+    //   user: "Patricia",
+    //   procedimento: "Obturação",
+    //   status: "Em Analise",
+    //   id: 3
+    // },
+    // { user: "Flavio", procedimento: "Remoção", status: "Finalizado", id: 4 }
+    // ]
   };
 
   handlePress = () => {
@@ -27,74 +39,51 @@ class Procedimentos extends Component {
   };
 
   handlePressUserCard = item => {
-    console.log("item");
-    console.log(item);
-    this.props.navigation.navigate("UserDisplay", { user: item });
+    this.props.navigation.navigate("UserDisplay", { user: item.pacienteDb });
   };
   handleFilter = filter => {
-    this.setState({filter})
+    this.setState({ filter });
     const newData = this.state.procedimentos.filter(item => {
-      const itemData = `${item.user.toUpperCase()} ${item.procedimento.toUpperCase()}`
+      const itemData = `${item.user.toUpperCase()} ${item.procedimento.toUpperCase()}`;
       const textData = filter.toUpperCase();
       return itemData.indexOf(textData) > -1;
-    })
+    });
 
-    this.setState({filterArray: newData})
-    // console.log(item.user)
-    // console.log(this.state.filter)
-    // if(item.user.includes(this.state.filter)) {
-    //   return (
-    //     <ProcedimentoCard
-    //     procedimento={item}
-    //     onPress={() => {
-    //       this.handlePressUserCard(item);
-    //     }}
-    //   />
-    //   )
-    // }
-  }
+    this.setState({ filterArray: newData });
+  };
   componentDidMount() {
-    // api.getUsers("pacientes").then(res => {
-    //   this.setState({ users: res.data });
-    // });
+    api.get("procedimentos").then(res => {
+      this.setState({ procedimentos: res.data });
+      this.setState({ filterArray: res.data });
+    });
   }
   render() {
+    if (this.state.procedimentos == null || this.state.filterArray == null)
+      return null;
     return (
       <View style={styles.mainConatinerStyle}>
         <View>
           <View>
             <SearchBar
-            placeholder="Nome, data"
-            lightTheme
-            round
-            onChangeText={filter => this.handleFilter(filter)}
-            value={this.state.filter}
-            />
-{/* 
-          <DefaultInput
-              label={"Filtro"}
-              placeholder={"Filtre pelo nome do paciente"}
+              placeholder="Nome, data"
+              lightTheme
+              round
               onChangeText={filter => this.handleFilter(filter)}
-              style={styles.inputStyle}
-              underlineColorAndroid={"rgba(0,0,0,0)"}
               value={this.state.filter}
-            />  */}
+            />
           </View>
-          <View>
-
-          </View>
+          <View></View>
         </View>
         <FlatList
           data={this.state.filterArray}
           renderItem={({ item }) => (
             <ProcedimentoCard
-            procedimento={item}
-            onPress={() => {
-              this.handlePressUserCard(item);
-            }}
+              procedimento={item}
+              onPress={() => {
+                this.handlePressUserCard(item);
+              }}
             />
-            )}
-      
+          )}
           keyExtractor={item => item.id.toString()}
         />
         <ActionButton

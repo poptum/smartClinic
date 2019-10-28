@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import PatientForm from "../components/PatientForm";
 import Hmp from "../components/Hmp";
 import Anamnese from "../components/Anamnese";
@@ -14,79 +11,76 @@ import { Button } from "react-native";
 class Usuario extends Component {
   static navigationOptions = {
     drawerLabel: () => null
-  }
-  state = { etapa: 1, usuario:null }; 
+  };
+  state = { etapa: 1, usuario: null };
   componentDidMount() {
     this.state.etapa = 1;
   }
   handlePress = (form, etapa) => {
-    let payload = {}
+    let payload = {};
     Object.assign(payload, form);
     let _this = this;
-    //salvar formulario referente a etapa e atualiar a etapa na tabela paciente 
+    //salvar formulario referente a etapa e atualiar a etapa na tabela paciente
     //passar o usuario para a proxima etapa do cadastro
     switch (etapa) {
       case 1:
         payload.etapa_cadastro = 1;
-          api
-      .registerPatient(payload, 'paciente')
-      .then(function(res) {
-        console.log(res.data)
-        //mensagem amigavel
-        _this.setState({ usuario: res.data.id });
-        _this.setState({ etapa: 2 });
-      })
-      .catch(function(err) {  
-        console.log("teste");
-        console.log(err);
-      });
-        break;
-      case 2:
-          payload.paciente = this.state.usuario;
-        payload.etapa_cadastro = 2;
-
-          api
-          .registerPatient(payload, 'anamnese')
+        api
+          .registerPatient(payload, "paciente")
           .then(function(res) {
             //mensagem amigavel
-        _this.setState({ etapa: 3 });
+            _this.setState({ usuario: res.data.id });
+            _this.setState({ etapa: 2 });
           })
           .catch(function(err) {
-            console.log("teste");
             console.log(err);
           });
-            break;
-      case 3:
-          payload.etapa_cadastro = 3;
+        break;
+      case 2:
+        payload.paciente = this.state.usuario;
+        payload.etapa_cadastro = 2;
 
-          payload.paciente = this.state.usuario;
-          api
-          .registerPatient(payload, 'hmp')
+        api
+          .registerPatient(payload, "anamnese")
           .then(function(res) {
             //mensagem amigavel
-        _this.setState({ etapa: 4 });
+            _this.setState({ etapa: 3 });
           })
           .catch(function(err) {
-            console.log("teste");
             console.log(err);
-          }); 
-            break;
-        case 4:
+          });
+        break;
+      case 3:
+        payload.etapa_cadastro = 3;
+
+        payload.paciente = this.state.usuario;
+        api
+          .registerPatient(payload, "hmp")
+          .then(function(res) {
+            //mensagem amigavel
+            _this.setState({ etapa: 4 });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        break;
+      case 4:
         payload.etapa_cadastro = 4;
-            api
-            .registerPatient(payload, 'historiaFamiliar')
-            .then(function(res) {
-              //mensagem amigavel
-              // this.setState({ etapa: 3 });
-              this.props.navigation.navigate("QrCode", {user: this.state.usuario.id});
-            })
-            .catch(function(err) {
-              console.log("teste");
-              console.log(err);
+        api
+          .registerPatient(payload, "historiaFamiliar")
+          .then(function(res) {
+            //mensagem amigavel
+            // this.setState({ etapa: 3 });
+            this.props.navigation.navigate("QrCode", {
+              user: this.state.usuario.id
             });
-              break;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        break;
       default:
-        console.log('Sorry, we are out of .');
+        console.log("Sorry, we are out of .");
     }
   };
 

@@ -8,40 +8,65 @@ import Panel from "../components/Panel";
 import api from "../services/api";
 import Icon from "react-native-vector-icons/Ionicons";
 import ActionButton from "react-native-action-button";
+import { AsyncStorage } from "react-native";
+import { NavigationEvents } from "react-navigation";
 
 class UserDisplay extends Component {
   static navigationOptions = {
     drawerLabel: () => null
-  }
+  };
   state = {
     user: {},
     loggedUser: {},
     anamnese: {},
-    procedimento: {}
+    procedimento: null
   };
   handlePress = () => {
-    this.props.navigation.navigate("Procedimento");
+    this.props.navigation.navigate("Procedimento", {
+      paciente: this.state.user
+    });
   };
 
-  handleProcedimento = (decision) => {
-    api.editProcedure({status:decision}, 'editProcedure')
+  handleProcedimento = decision => {
+    let _this = this;
+    api
+      .editProcedimento(
+        { status: decision, id: this.state.procedimento.id },
+        "editProcedimento"
+      )
       .then(function(res) {
-        this.setState({ procedimento: res.data });
+        console.log("res.data");
+        console.log(res.data);
+        _this.setState({ procedimento: res.data[0] });
       })
       .catch(function(err) {
-        console.log("teste");
         console.log(err);
       });
   };
+  async _getStorageValue() {
+    var value = await AsyncStorage.getItem("ITEM_NAME");
+    return value;
+  }
 
   componentDidMount() {
     const user = this.props.navigation.getParam("user");
-    const loggedUser = AsyncStorage.getItem("@user:profile");
+    let _this = this;
+    AsyncStorage.getItem("@user:profile").then(function(res) {
+      _this.setState({ loggedUser: res });
+    });
     this.setState({ user });
-    this.setState({ loggedUser });
     this.setState({ anamnese: user.anamneseDb });
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      api.get("procedimento", { id: user.id }).then(res => {
+        this.setState({ procedimento: res.data[0] });
+      });
+    });
+  }
+  componentWillUnmount() {
+    this.focusListener.remove();
   }
   render() {
+    if (this.state.procedimento == null) return null;
     return (
       <View style={styles.mainConatinerStyle}>
         <ScrollView>
@@ -49,7 +74,7 @@ class UserDisplay extends Component {
           <Panel key={5} title={"Procedimento"} bgColor={"grey"}>
             <ProcedimentoDisplay
               procedimento={this.state.procedimento}
-              profile = {this.state.loggedUser}            
+              profile={this.state.loggedUser}
               onPress={this.handleProcedimento}
             />
           </Panel>

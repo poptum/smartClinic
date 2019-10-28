@@ -10,32 +10,25 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { Row } from "native-base";
-type Props = { procedimento: any, profile: any, onPress: any  };
+type Props = { procedimento: any, profile: any, onPress: any };
 
-handlePress = (ordem) => {
-  if(ordem == "Reprovar")
-    this.props.onPress("reprovar");
-  else
-    this.props.onPress("aprovar");
-
+handlePress = ordem => {
+  if (ordem == "Reprovar") this.props.onPress("reprovar");
+  else this.props.onPress("aprovar");
 };
 // TODO conferir a estilização dos componentes
 export default class ProcedimentoDisplay extends Component {
   render() {
-    console.log(this.props);
+    let _this = this;
     return (
       <View style={styles.containerDenouncer}>
         <View style={styles.row}>
           <Text style={styles.title}> Procedimento a ser realizado : </Text>
-          <Text style={styles.subtitle}>
-            {this.props.procedimento.nome}
-          </Text>
+          <Text style={styles.subtitle}>{this.props.procedimento.nome}</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.title}> Aluno a realizar o procedimento : </Text>
-          <Text style={styles.subtitle}>
-            {this.props.procedimento.aluno}
-          </Text>
+          <Text style={styles.subtitle}>{this.props.procedimento.aluno}</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.title}> Descrição do procedimento : </Text>
@@ -43,25 +36,33 @@ export default class ProcedimentoDisplay extends Component {
             {this.props.procedimento.descricao}
           </Text>
         </View>
-        {this.props.procedimento.status == 'pendente' && this.props.profile == 'professor'  ?  
-        <View style={styles.row}>
-          <View style={styles.column}>
-            <DefaultButton
-              style={{ backgroundColor: "green", flex: 0.8 }}
-              title={"Aprovar"}
-              onPress={() => this.handlePress("Aprovar")}
-              disabled={false}
-            />
+        {console.log(this.props.procedimento.status)}
+        {this.props.procedimento.status == "Pendente" &&
+        this.props.profile == 2 ? (
+          <View style={styles.row}>
+            <View style={styles.column}>
+              <DefaultButton
+                style={{ backgroundColor: "green", flex: 0.8 }}
+                title={"Aprovar"}
+                onPress={() => this.props.onPress("Aprovado")}
+                disabled={false}
+              />
+            </View>
+            <View style={styles.column}>
+              <DefaultButton
+                title={"Reprovar"}
+                onPress={() => this.props.onPress("Reprovado")}
+                disabled={false}
+              />
+            </View>
           </View>
-          <View style={styles.column}>
-            <DefaultButton
-              title={"Reprovar"}
-              onPress={() => this.handlePress("Reprovar")}
-              disabled={false}
-            />
+        ) : (
+          <View>
+            <Text style={styles.subtitle}>
+              {this.props.procedimento.status}
+            </Text>
           </View>
-        </View>
-        : <View>{this.props.procedimento.status}</View>}
+        )}
       </View>
     );
   }
