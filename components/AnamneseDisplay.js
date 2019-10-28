@@ -91,7 +91,6 @@ type Props = { user: any };
 // TODO conferir a estilização dos componentes
 export default class AnamneseDisplay extends Component {
   render() {
-    console.log(this.props);
     return (
       <View style={styles.containerDenouncer}>
         <View style={styles.row}>

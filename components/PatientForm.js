@@ -43,24 +43,25 @@ class PatientForm extends Component {
   };
   componentDidMount() {}
   handlePress = () => {
-    let payload = {}
+    let payload = {};
     Object.assign(payload, this.state);
-    if(payload.cep)
-    payload.cep = payload.cep.replace(/[^0-9.]/g, '');
-    if(payload.telefone_comercial)
-    payload.telefone_comercial = payload.telefone_comercial.replace(/[^0-9.]/g, '');
-    if(payload.telefone)
-    payload.telefone = payload.telefone.replace(/[^0-9.]/g, '');
+    if (payload.cep) payload.cep = payload.cep.replace(/[^0-9.]/g, "");
+    if (payload.telefone_comercial)
+      payload.telefone_comercial = payload.telefone_comercial.replace(
+        /[^0-9.]/g,
+        ""
+      );
+    if (payload.telefone)
+      payload.telefone = payload.telefone.replace(/[^0-9.]/g, "");
     this.props.salvar(payload, 1);
   };
 
-  handleCEP = cep => { 
+  handleCEP = cep => {
     this.setState({ cep });
     if (cep.length >= 9)
       fetch("https://api.pagar.me/1/zipcodes/" + cep, { method: "get" })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           this.setState({
             estado: data.state,
             cidade: data.city,
@@ -81,7 +82,7 @@ class PatientForm extends Component {
               style={styles.inputStyle}
               underlineColorAndroid={"rgba(0,0,0,0)"}
               value={this.state.nome}
-            /> 
+            />
 
             <View style={{}}>
               <View style={{ flex: 0.5 }}>
@@ -193,7 +194,7 @@ class PatientForm extends Component {
                   placeholder={"Data de Nascimento"}
                   onChangeText={data_nascimento =>
                     this.setState({ data_nascimento })
-                  }  
+                  }
                   style={styles.inputStyle}
                   underlineColorAndroid={"rgba(0,0,0,0)"}
                   value={this.state.data_nascimento}
@@ -236,7 +237,7 @@ class PatientForm extends Component {
                   style={styles.selectStyle}
                   onValueChange={(itemValue, itemIndex) =>
                     this.setState({ genero: itemValue })
-                  } 
+                  }
                 >
                   <Picker.Item label="Masculino" value="masculino" />
                   <Picker.Item label="Feminino" value="feminino" />

@@ -8,7 +8,12 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { Row } from "native-base";
-type Props = { title: string, onPress: any, procedimento: any, disabled?: boolean };
+type Props = {
+  title: string,
+  onPress: any,
+  procedimento: any,
+  disabled?: boolean
+};
 
 // TODO conferir a estilização dos componentes
 export default class ProcedimentoCard extends PureComponent<Props> {
@@ -21,12 +26,15 @@ export default class ProcedimentoCard extends PureComponent<Props> {
             source={require("../assets/user.png")}
           />
           <View style={styles.body}>
-            <Text style={styles.title}> {this.props.procedimento.user} </Text>
-            <Text style={styles.email}> {this.props.procedimento.procedimento} </Text>
+            <Text style={styles.title}>
+              {" "}
+              {this.props.procedimento.pacienteDb.nome}{" "}
+            </Text>
+            <Text style={styles.email}> {this.props.procedimento.nome} </Text>
           </View>
           <View style={styles.body}>
             <Text style={styles.title}> Status </Text>
-            <Text style={styles.email}>  {this.props.procedimento.status} </Text>
+            <Text style={styles.email}> {this.props.procedimento.status} </Text>
           </View>
         </View>
       </TouchableNativeFeedback>

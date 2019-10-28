@@ -67,15 +67,10 @@ class Hmp extends Component {
     this.props.salvar(this.state.name);
   };
   handleCheck = (nome_input, obj) => {
-    console.log("handleCheck");
-    console.log(nome_input);
-    console.log(obj);
     this.setState({ [nome_input]: obj });
   };
   handleOnChangeText = (nome_input, motivo) => {
     let obj = this.state[nome_input];
-    console.log("nome_input");
-    console.log(obj);
     obj.descricao = motivo;
     this.setState({ [nome_input]: obj });
   };

@@ -112,16 +112,12 @@ export default class Panel extends PureComponent<Props, State> {
   };
 
   _setMaxHeight(event) {
-    console.log("maxheight");
-    console.log(event.nativeEvent.layout.height);
     this.setState({
       maxHeight: event.nativeEvent.layout.height
     });
   }
 
   _setMinHeight(event) {
-    console.log("minheight");
-    console.log(event.nativeEvent.layout.height);
     this.setState({
       minHeight: event.nativeEvent.layout.height,
       animation: new Animated.Value(event.nativeEvent.layout.height)
