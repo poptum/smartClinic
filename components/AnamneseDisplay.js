@@ -96,11 +96,10 @@ export default class AnamneseDisplay extends Component {
         <View style={styles.row}>
           <Text style={styles.title}>
             {" "}
-            Queixa principal ou motibo da consulta(QP):{" "}
+            Queixa principal ou motivo da consulta(QP):{" "}
           </Text>
           <Text style={styles.subtitle}>
-            {" "}
-            {this.props.user.queixa_principal}{" "}
+            {this.props.user.queixa_principal}
           </Text>
         </View>
         <View style={styles.row}>
@@ -124,7 +123,6 @@ export default class AnamneseDisplay extends Component {
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: "row",
     marginBottom: 15
   },
   column: {

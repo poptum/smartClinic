@@ -12,7 +12,10 @@ import DefaultButton from "../components/DefaultButton";
 import DefaultInput from "../components/DefaultInput";
 import { Button } from "react-native";
 import { Drawer, Container, Header, Content } from "native-base";
-import QRCode from 'react-native-qrcode';
+import QRCode from "react-native-qrcode";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
+import { BarCodeScanner } from "expo-barcode-scanner";
 class SideBar extends Component {
   render() {
     return (
@@ -32,29 +35,54 @@ class Home extends Component {
   openDrawer = () => {
     this.drawer._root.open();
   };
-  state = { user: "", password: "" };
-  componentDidMount() {}
+  state = { user: "", password: "", hasCameraPermission: null, scanned: false };
+  async componentDidMount() {
+    this.getPermissionsAsync();
+  }
+  getPermissionsAsync = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === "granted" });
+  };
   handlePress = () => {};
   render() {
+    const { hasCameraPermission, scanned } = this.state;
+
+    if (hasCameraPermission === null) {
+      return <Text>Requesting for camera permission</Text>;
+    }
+    if (hasCameraPermission === false) {
+      return <Text>No access to camera</Text>;
+    }
     return (
-      <View style={{ flex: 1 }}>
-        <Text style={{ flex: 0.2 }}>
-          Bem Vindo *usuario*, futuramente aqui ficarão seus compromissos
-        </Text>
-        <TouchableOpacity onPress={this.props.navigation.openDrawer}>
-          <Text>Open Drawer</Text>
-        </TouchableOpacity>
-        <Text style={{ flex: 0.8, backgroundColor: "red" }}>
-          Espaço dedicado para leitura de qrcode
-        </Text>
-        {/* <QRCode
-          value={'teste'}
-          size={200}
-          bgColor='purple'
-          fgColor='white'/> */}
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "flex-end"
+        }}
+      >
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
+
+        {scanned && (
+          <Button
+            title={"Tap to Scan Again"}
+            onPress={() => this.setState({ scanned: false })}
+          />
+        )}
       </View>
     );
   }
+  handleBarCodeScanned = ({ type, data }) => {
+    console.log(data);
+    this.setState({ scanned: true });
+    api.get("paciente", { id: data }).then(res => {
+      console.log(res.data[0]);
+      this.props.navigation.navigate("UserDisplay", { user: res.data[0] });
+    });
+  };
 }
 class SettingsScreen extends React.Component {
   render() {

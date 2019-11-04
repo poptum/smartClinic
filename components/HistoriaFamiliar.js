@@ -27,7 +27,7 @@ class HistoriaFamiliar extends Component {
 
   componentDidMount() {}
   handlePress = () => {
-    this.props.salvar(this.state.name);
+    this.props.salvar(this.state, 4);
   };
   handleCheck = (nome_input, obj) => {
     this.setState({ [nome_input]: obj });

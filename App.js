@@ -21,8 +21,8 @@ const DrawerNavigator = createDrawerNavigator({
   Home: {
     screen: Login,
     navigationOptions: ({ navigation }) => ({
-      drawerLockMode: "locked-closed",
-    }) 
+      drawerLockMode: "locked-closed"
+    })
   },
   UsersList: {
     screen: UsersList,
@@ -32,8 +32,7 @@ const DrawerNavigator = createDrawerNavigator({
   },
   Usuario: {
     screen: Usuario,
-    navigationOptions: () => ({
-    })
+    navigationOptions: () => ({})
   },
   Procedimentos: {
     screen: Procedimentos,
@@ -47,16 +46,15 @@ const DrawerNavigator = createDrawerNavigator({
       title: "Procedimento"
     })
   },
-  // QrCode: {
-  //   screen: QrCode,
-  //   navigationOptions: () => ({
-  //     title: "QrCode"
-  //   })
-  // },
+  QrCode: {
+    screen: QrCode,
+    navigationOptions: () => ({
+      title: "QrCode"
+    })
+  },
   UserDisplay: {
     screen: UserDisplay,
-    navigationOptions: () => ({
-    })
+    navigationOptions: () => ({})
   },
   HomePage: {
     screen: Home,

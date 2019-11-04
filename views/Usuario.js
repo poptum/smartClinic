@@ -54,6 +54,7 @@ class Usuario extends Component {
         payload.etapa_cadastro = 3;
 
         payload.paciente = this.state.usuario;
+        console.log(payload);
         api
           .registerPatient(payload, "hmp")
           .then(function(res) {
@@ -71,8 +72,8 @@ class Usuario extends Component {
           .then(function(res) {
             //mensagem amigavel
             // this.setState({ etapa: 3 });
-            this.props.navigation.navigate("QrCode", {
-              user: this.state.usuario.id
+            _this.props.navigation.navigate("QrCode", {
+              user: _this.state.usuario.id
             });
           })
           .catch(function(err) {

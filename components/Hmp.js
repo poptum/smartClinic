@@ -64,7 +64,7 @@ class Hmp extends Component {
 
   componentDidMount() {}
   handlePress = () => {
-    this.props.salvar(this.state.name);
+    this.props.salvar(this.state, 3);
   };
   handleCheck = (nome_input, obj) => {
     this.setState({ [nome_input]: obj });
@@ -104,7 +104,7 @@ class Hmp extends Component {
           />
           <HmpInput
             label={
-              "Sistema Cardiovascular (pressão arterial, angina, infarto, insuficiência cardiaca, prótese valvar, sopro, arrítmias, cirurgias cardíacas, marca-passo, prolapso de válvula mitral ou febre reumática com cardiopatia)"
+              "Sistema respiratório (pneumonia, asma, bronquite, fibrose cística, tuberculose, enfisema, dificuldade para respirar, sinusite, tosse crônica, etc):"
             }
             nome_input={"sistema_respiratorio"}
             check={this.handleCheck}
@@ -120,7 +120,9 @@ class Hmp extends Component {
             obj={this.state.sistema_respiratorio}
           />
           <HmpInput
-            label={""}
+            label={
+              "Sistema digestório (ásia, gastrite, cirrose, icterícia, anorexia nervosa, bulimia, colite, diarreia persistente etc):"
+            }
             nome_input={"sistema_digestorio"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -135,7 +137,9 @@ class Hmp extends Component {
             obj={this.state.sistema_digestorio}
           />
           <HmpInput
-            label={""}
+            label={
+              "Sistema genitourinário (insuficiência renal, cálculos, gravidez, doenças sexualmente transmissíveis):"
+            }
             nome_input={"sistema_genitourinario"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -150,7 +154,9 @@ class Hmp extends Component {
             obj={this.state.sistema_genitourinario}
           />
           <HmpInput
-            label={""}
+            label={
+              "Sistema endócrino (diabetes, distúrbios de tireoide, distúrbio hipofisário, etc):"
+            }
             nome_input={"sistema_endocrino"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -165,7 +171,9 @@ class Hmp extends Component {
             obj={this.state.sistema_endocrino}
           />
           <HmpInput
-            label={""}
+            label={
+              "Sistema nervoso central (convulsões, desmaios, perda de consciência, paralisia cerebral, trauma, crânio encefálico, distúrbios sensoriais, epilepsia, síndrome do pânico, derrame, cefaleia intensa, etc):"
+            }
             nome_input={"sistema_nervoso_central"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -180,7 +188,9 @@ class Hmp extends Component {
             obj={this.state.sistema_nervoso_central}
           />
           <HmpInput
-            label={""}
+            label={
+              "Sistema sensitivo (cegueira, glaucoma, conjutivite, úlceras, auditivo etc):"
+            }
             nome_input={"sistema_sensitivo"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -195,7 +205,9 @@ class Hmp extends Component {
             obj={this.state.sistema_sensitivo}
           />
           <HmpInput
-            label={""}
+            label={
+              "Sistemas hematopoiético e linfático (anemia, transfusões, sangramento nasal, equimoses, alterações de coagulação, susceptibilidade a infecções, linfadenopatia, hemofilia, leucemia, etc):"
+            }
             nome_input={"sistema_hematopoietico_e_linfatico"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -210,7 +222,9 @@ class Hmp extends Component {
             obj={this.state.sistema_hematopoietico_e_linfatico}
           />
           <HmpInput
-            label={""}
+            label={
+              "Alergias (anestésicos, analgésicos, antibióticos, anti-inflamatórios, matais, látex, iodo etc):"
+            }
             nome_input={"alergias"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -225,7 +239,9 @@ class Hmp extends Component {
             obj={this.state.alergias}
           />
           <HmpInput
-            label={""}
+            label={
+              "Estado emocional e psiquico (estresse, ansiedade, depressão e psicose):"
+            }
             nome_input={"estado_emocional_e_psiquico"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -240,7 +256,7 @@ class Hmp extends Component {
             obj={this.state.estado_emocional_e_psiquico}
           />
           <HmpInput
-            label={""}
+            label={"Tem ou teve doenças infecto contagiosas? "}
             nome_input={"doenças_infecto_contagiosas"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -255,7 +271,9 @@ class Hmp extends Component {
             obj={this.state.doenças_infecto_contagiosas}
           />
           <HmpInput
-            label={""}
+            label={
+              "Já esteve internado ou se submeteu a alguma cirurgia, tratamentos com radioterapia ou quimioterapia?"
+            }
             nome_input={"internado_cirurgia_radioterapia_quimioterapia"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -281,7 +299,9 @@ class Hmp extends Component {
           />
           {/* consulta medica */}
           <HmpInput
-            label={""}
+            label={
+              "Medicamentos em uso atual ou nos últimos 12 meses (nome comercial, genérico, reações adversar etc):"
+            }
             nome_input={"medicamentos_atual_12_meses"}
             check={this.handleCheck}
             onChangeText={descricao =>
@@ -319,7 +339,9 @@ class Hmp extends Component {
           {/* outras informações
           hmp */}
           <HmpInput
-            label={""}
+            label={
+              "Já sofreu algum tipo de traumatismo na boca, nos dentes ou nos maxilares?"
+            }
             nome_input={"traumatismo"}
             check={this.handleCheck}
             onChangeText={descricao =>

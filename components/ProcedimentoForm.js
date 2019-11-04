@@ -103,7 +103,7 @@ class PatientForm extends Component {
             <DefaultInput
               label={"Procedimento"}
               placeholder={"Procedimento"}
-              onChangeText={procedimento => this.setState({ procedimento })}
+              onChangeText={nome => this.setState({ nome })}
               style={styles.inputStyle}
               underlineColorAndroid={"rgba(0,0,0,0)"}
               value={this.state.nome}

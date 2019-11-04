@@ -23,15 +23,17 @@ export default class ProcedimentoDisplay extends Component {
     return (
       <View style={styles.containerDenouncer}>
         <View style={styles.row}>
-          <Text style={styles.title}> Procedimento a ser realizado : </Text>
+          <Text style={styles.title}> Procedimento </Text>
           <Text style={styles.subtitle}>{this.props.procedimento.nome}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.title}> Aluno a realizar o procedimento : </Text>
-          <Text style={styles.subtitle}>{this.props.procedimento.aluno}</Text>
+          <Text style={styles.title}> Aluno </Text>
+          <Text style={styles.subtitle}>
+            {this.props.procedimento.pacienteDb.nome}
+          </Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.title}> Descrição do procedimento : </Text>
+          <Text style={styles.title}> Descrição: </Text>
           <Text style={styles.subtitle}>
             {this.props.procedimento.descricao}
           </Text>
@@ -42,7 +44,6 @@ export default class ProcedimentoDisplay extends Component {
           <View style={styles.row}>
             <View style={styles.column}>
               <DefaultButton
-                style={{ backgroundColor: "green", flex: 0.8 }}
                 title={"Aprovar"}
                 onPress={() => this.props.onPress("Aprovado")}
                 disabled={false}
@@ -57,9 +58,9 @@ export default class ProcedimentoDisplay extends Component {
             </View>
           </View>
         ) : (
-          <View>
-            <Text style={styles.subtitle}>
-              {this.props.procedimento.status}
+          <View style={styles.procedimento}>
+            <Text style={styles.textStyle}>
+              Procedimento {this.props.procedimento.status}
             </Text>
           </View>
         )}
@@ -74,9 +75,10 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   column: {
+    flexDirection: "column",
     flex: 0.5,
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: 5,
+    paddingRight: 5
   },
   tricolumn: {
     flex: 0.3
@@ -86,10 +88,28 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   title: {
+    flex: 0.5,
     fontSize: 20,
-    fontWeight: "500"
+    paddingLeft: 10,
+    paddingRight: 10
   },
   subtitle: {
-    fontSize: 15
+    flex: 0.5,
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  procedimento: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 80,
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  textStyle: {
+    fontSize: 24,
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "500"
   }
 });

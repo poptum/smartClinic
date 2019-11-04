@@ -49,16 +49,18 @@ class UserDisplay extends Component {
   }
 
   componentDidMount() {
-    const user = this.props.navigation.getParam("user");
     let _this = this;
-    AsyncStorage.getItem("@user:profile").then(function(res) {
-      _this.setState({ loggedUser: res });
-    });
-    this.setState({ user });
-    this.setState({ anamnese: user.anamneseDb });
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      const user = _this.props.navigation.getParam("user");
+      AsyncStorage.getItem("@user:profile").then(function(res) {
+        _this.setState({ loggedUser: res });
+      });
+      _this.setState({ user });
+      _this.setState({ anamnese: user.anamneseDb });
+      console.log(user);
       api.get("procedimento", { id: user.id }).then(res => {
-        this.setState({ procedimento: res.data[0] });
+        if (res.data[0] == undefined) _this.setState({ procedimento: 1 });
+        else _this.setState({ procedimento: res.data[0] });
       });
     });
   }
@@ -70,14 +72,15 @@ class UserDisplay extends Component {
     return (
       <View style={styles.mainConatinerStyle}>
         <ScrollView>
-          {/* mostrar procedimento somente se tiver procedimentos */}
-          <Panel key={5} title={"Procedimento"} bgColor={"grey"}>
-            <ProcedimentoDisplay
-              procedimento={this.state.procedimento}
-              profile={this.state.loggedUser}
-              onPress={this.handleProcedimento}
-            />
-          </Panel>
+          {this.state.procedimento != 1 && this.state.procedimento != null ? (
+            <Panel key={5} title={"Procedimento"} bgColor={"grey"}>
+              <ProcedimentoDisplay
+                procedimento={this.state.procedimento}
+                profile={this.state.loggedUser}
+                onPress={this.handleProcedimento}
+              />
+            </Panel>
+          ) : null}
 
           <Panel key={1} title={"Dados Pessoais"} bgColor={"grey"}>
             <UserDetailsDisplay
