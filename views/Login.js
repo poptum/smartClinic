@@ -5,13 +5,16 @@ import {
   TextInput,
   View,
   FlatList,
-  ToastAndroid
+  ToastAndroid,
+  ImageBackground
 } from "react-native";
 import api from "../services/api";
 import DefaultButton from "../components/DefaultButton";
 import DefaultInput from "../components/DefaultInput";
 import { AsyncStorage } from "react-native";
 import { Button } from "react-native";
+import logo from "../assets/logo.png";
+
 class Login extends Component {
   static navigationOptions = {
     drawerLabel: () => null
@@ -38,32 +41,36 @@ class Login extends Component {
   };
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={{ flex: 0.6 }}>LOGO e titulo</Text>
-        <DefaultInput
-          label={"Usuario"}
-          placeholder={"Usuario"}
-          onChangeText={user => this.setState({ user })}
-          style={styles.inputStyle}
-          underlineColorAndroid={"rgba(0,0,0,0)"}
-          value={this.state.user}
-        />
-        <DefaultInput
-          label={"Senha"}
-          placeholder={"Senha"}
-          onChangeText={password => this.setState({ password })}
-          style={styles.inputStyle}
-          underlineColorAndroid={"rgba(0,0,0,0)"}
-          value={this.state.password}
-        />
-        <View style={{ marginTop: 30 }}></View>
-        <DefaultButton
-          style={{ flex: 0.2 }}
-          title={"Acessar"}
-          onPress={this.handlePress}
-          disabled={false}
-        />
-      </View>
+      <ImageBackground source={logo} style={{width: '100%', height: '80%'}}>
+        <View style={styles.container}>
+          <View style={{ flex: 0.6 }}></View>
+          <View style={{ flex: 0.4 }}>
+          <DefaultInput
+            label={"Usuario"}
+            placeholder={"Usuario"}
+            onChangeText={user => this.setState({ user })}
+            style={styles.inputStyle}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
+            value={this.state.user}
+          />
+          <DefaultInput
+            label={"Senha"}
+            placeholder={"Senha"}
+            onChangeText={password => this.setState({ password })}
+            style={styles.inputStyle}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
+            value={this.state.password}
+          />
+          <View style={{ marginTop: 10}}></View>
+          <DefaultButton
+            title={"Acessar"}
+            onPress={this.handlePress}
+            disabled={false}
+          />
+          </View>
+      
+        </View>
+      </ImageBackground>
     );
   }
 }
