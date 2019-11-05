@@ -31,6 +31,7 @@ class Usuario extends Component {
             //mensagem amigavel
             _this.setState({ usuario: res.data.id });
             _this.setState({ etapa: 2 });
+        
           })
           .catch(function(err) {
             console.log(err);
@@ -59,7 +60,9 @@ class Usuario extends Component {
           .registerPatient(payload, "hmp")
           .then(function(res) {
             //mensagem amigavel
-            _this.setState({ etapa: 4 });
+            _this.props.navigation.navigate("QrCode", {
+              user: _this.state.usuario
+            });
           })
           .catch(function(err) {
             console.log(err);
@@ -67,14 +70,14 @@ class Usuario extends Component {
         break;
       case 4:
         payload.etapa_cadastro = 4;
+        console.log('laparrilha')
         api
           .registerPatient(payload, "historiaFamiliar")
           .then(function(res) {
+            console.log('teste')
             //mensagem amigavel
             // this.setState({ etapa: 3 });
-            _this.props.navigation.navigate("QrCode", {
-              user: _this.state.usuario.id
-            });
+         
           })
           .catch(function(err) {
             console.log(err);
